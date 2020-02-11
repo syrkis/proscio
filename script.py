@@ -8,8 +8,11 @@ def hello_world():
 def hellow_world2():
     return 'hello group B, from Johan'
 
+def hello_world3():
+    return "hello Group B, from Mitchell"
+
 def main():
     print(hello_world())
 
 if __name__ == "__main__":
-    main() 
+    main()
