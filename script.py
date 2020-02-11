@@ -10,6 +10,9 @@ def hellow_world2():
 
 def hello_world3():
     return "hello Group B, from Mitchell"
+    
+def hello_world4():
+    return "hello Group B, from Philip"
 
 def main():
     print(hello_world())
