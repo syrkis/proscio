@@ -14,8 +14,12 @@ def hello_world3():
 def hello_world4():
     return "hello Group B, from Philip"
 
+def test():
+    return "testing conflict"
+
 def main():
     print(hello_world())
 
 if __name__ == "__main__":
     main()
+
