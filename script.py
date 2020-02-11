@@ -14,6 +14,9 @@ def hello_world3():
 def hello_world4():
     return "hello Group B, from Philip"
 
+def hello_world5():
+	return "hello Group B, from Mia"
+
 def hello_world4():
     return "test"
 
