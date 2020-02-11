@@ -14,6 +14,10 @@ def hello_world3():
 def hello_world4():
     return "hello Group B, from Philip"
 
+def hello_world4():
+    return "test"
+
+
 def main():
     print(hello_world())
 
