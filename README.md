@@ -1,6 +1,3 @@
-# Demographics And Sociolinguistics
-First Year Project repo for Group B. Project 1. Demographics and Sociolinguistics
+# Demographic and sociolinguistic analysis of the bibliographies of selected authors
 
-Link to kaggle data set https://www.kaggle.com/jrobischon/wikipedia-movie-plots/data
-
-Link to box office earnings data https://www.the-numbers.com/box-office-records/domestic/all-movies/cumulative/all-time?fbclid=IwAR1m50ZoSW9ap93lzq-_xxPo-PxIQl3azUfcog0o36PipemBSS-llTBO46k
+Based on popular and freely available (for download on Project Gutenberg) bibliographies from selected authors from the UK and the US, our analysis explores correlations between language patterns andd demographic author-data.
