@@ -6,7 +6,7 @@
 # import statements
 import re
 import requests
-
+import time
 
 # book crawler
 def crawler(authors):
@@ -27,19 +27,34 @@ def crawler(authors):
 
     return books                                                                # returns dictionary with urls for scrape
 
-
 # book scraper
 def scraper(books):
+    """scrapes data from given urls, and saves them as .txt files in directories corresponding to author names"""
+    pattern = "Title: .*"
+    errors = 0
     for author in books.keys():
         directory = "_".join(author.lower().split(' '))
         for book in books[author]:
-            print(book)
-
+            try:
+                page = requests.get(book)
+                content = page.text
+                title = re.findall(pattern, content[:1000])
+                title = title[0][7:]
+                outfile = open("_".join(title.lower().split(' ')) + '.txt', 'w')
+                outfile.write(content)
+                outfile.close()
+                print('Scraped', title)
+                time.sleep(2)
+                break
+            except:
+                errors += 1
+                print("Error " + str(errors) + " occurred.")
+                pass
 # call stack
 def main():
     data = [
-        {'id': '9', 'name': "Herman Melville"},
-        {'id': '125', 'name': "Joseph Conrad"}
+        {"id": "125", "name": "Joseph Conrad"},
+        {"id" : "9", "name" : "Herman Melville"}
         ]
 
     urls = crawler(data)
