@@ -31,8 +31,9 @@ def crawler(authors):
 # book scraper
 def scraper(books):
     for author in books.keys():
-        name = author
-        print(name)
+        directory = "_".join(author.lower().split(' '))
+        for book in books[author]:
+            print(book)
 
 # call stack
 def main():
