@@ -70,7 +70,7 @@ def scraper(books):
             
             except:                                                             # handler for if anything above goes wrong
                 errors += 1                                                     # increment error counter
-                print("Error " + str(errors) + " occurred.")                    # print error notification to stdout
+                print("Skipping books due to wrong format")                    # print error notification to stdout
                 time.sleep(1)                                                   # waits for a second so as to not accedentally dos-attack gutenberg
                 pass                                                            # continue
 
