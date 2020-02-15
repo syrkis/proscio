@@ -45,7 +45,7 @@ def scraper(books):
     """scrapes data from given urls, and saves them as .txt files in directories corresponding to author names"""
     
     pattern = "Title: .*"                                                       # regex expression for finding titles in text
-    errors = 0                                                                  # error counter
+    skips = 0                                                                  # error counter
     
     for author in books.keys():                                                 # outer author loop
         
@@ -69,7 +69,7 @@ def scraper(books):
                 continue                                                        # continue   
             
             except:                                                             # handler for if anything above goes wrong
-                errors += 1                                                     # increment error counter
+                skips += 1                                                     # increment error counter
                 print("Skipping books due to wrong format")                    # print error notification to stdout
                 time.sleep(1)                                                   # waits for a second so as to not accedentally dos-attack gutenberg
                 pass                                                            # continue
