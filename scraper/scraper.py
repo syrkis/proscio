@@ -2,7 +2,6 @@
 #   downloads relevant books from crawled, nested arrays
 # by: Noah Syrkis
 
-
 # import statements
 import re                                                                       # import regex expression library
 import requests                                                                 # import internet browser
@@ -13,17 +12,19 @@ import os                                                                       
 # author-url constructor
 def constructor(file):
     """generate a dictionary of authors and id's for scraping"""
+
     sheet = open(file, 'r').readlines()                                         # open data sheet and read lines
     sheet = sheet[1:]                                                           # remove header
     sheet = [line.split(';') for line in sheet]                                 # split line into elements
     authors = [{'id' : line[0], 'name' : line[1]} for line in sheet]            # construct list of dictionaries of ids and names
     return authors                                                              # return constructed dictionary for book url crawling
 
+
 # book crawler
 def crawler(authors):
     """generates list of top 25 book txt gutenberg download urls based on the input author id list"""
 
-    books = {author['name']: None for author in authors}                        # dictionary to hold links for authors books                 
+    books = {author['name']: [] for author in authors}                          # dictionary to hold links for authors books                 
     pattern = 'ebooks/[0-9]*'                                                   # regex expression for finding books links on author pages
     base = 'http://www.gutenberg.org/files'                                     # base url for gutenberg files
     format = '-0.txt'                                                           # format for download (could be switched to epub or html)
@@ -37,6 +38,7 @@ def crawler(authors):
         books[author['name']] = [base + url[6:] * 2 + format for url in urls]   # adding full links to books dict for scrape
 
     return books                                                                # returns dictionary with urls for scrape
+
 
 # book scraper
 def scraper(books):
@@ -71,6 +73,7 @@ def scraper(books):
                 print("Error " + str(errors) + " occurred.")                    # print error notification to stdout
                 time.sleep(1)                                                   # waits for a second so as to not accedentally dos-attack gutenberg
                 pass                                                            # continue
+
 
 # call stack
 def main():
