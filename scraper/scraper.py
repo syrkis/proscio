@@ -4,9 +4,10 @@
 
 
 # import statements
-import re
-import requests
-import time
+import re                                                                       # import regex expression library
+import requests                                                                 # import internet browser
+import time                                                                     # import timer for loop pause
+import os                                                                       # import os so as to create directories
 
 # book crawler
 def crawler(authors):
@@ -30,26 +31,38 @@ def crawler(authors):
 # book scraper
 def scraper(books):
     """scrapes data from given urls, and saves them as .txt files in directories corresponding to author names"""
-    pattern = "Title: .*"
-    errors = 0
-    for author in books.keys():
-        directory = "_".join(author.lower().split(' '))
-        for book in books[author]:
-            try:
-                page = requests.get(book)
-                content = page.text
-                title = re.findall(pattern, content[:1000])
-                title = title[0][7:]
-                outfile = open("_".join(title.lower().split(' ')) + '.txt', 'w')
-                outfile.write(content)
-                outfile.close()
-                print('Scraped', title)
-                time.sleep(2)
-                break
-            except:
-                errors += 1
-                print("Error " + str(errors) + " occurred.")
-                pass
+    
+    pattern = "Title: .*"                                                       # regex expression for finding titles in text
+    errors = 0                                                                  # error counter
+    
+    for author in books.keys():                                                 # outer author loop
+        
+        directory = "_".join(author.lower().split(' '))                         # create directory name from author name
+        if not os.path.exists(directory):                                       # ensuring directories do not already exists
+            os.makedirs(directory)                                              # makes author directory
+        
+        for book in books[author]:                                              # looping through books in bibliography
+            
+            try:                                                                # prevents programming from stopping in case of broken link
+                page = requests.get(book, data=text.encode('utf-8'))                                       # gets specific books .txt data from scraped url
+                content = page.text                                             # reads book data
+                title = re.findall(pattern, content[:1000])                     # finds book title
+                title = title[0][7:]                                            # removes 'Title: ' from title-string
+                file_name = "_".join(title[:-1].lower().split(' ')) + '.txt'    # removes spaces and convers to lower case for title
+                outfile = open(directory + '/' + file_name, 'w')                # generating file to be written in, in author directory
+                outfile.write(content)                                          # writing content to file
+                outfile.close()                                                 # closes file
+                print('Scraped', title)                                         # informs stdout of successfull scrape
+                time.sleep(1)                                                   # waits for a second so as to not accedentally dos-attack gutenberg
+                continue                                                        # continue   
+            
+            except:                                                             # handler for if anything above goes wrong
+                errors += 1                                                     # increment error counter
+                print("Error " + str(errors) + " occurred.")                    # print error notification to stdout
+                time.sleep(1)                                                   # waits for a second so as to not accedentally dos-attack gutenberg
+                pass                                                            # continue
+
+
 # call stack
 def main():
     data = [
