@@ -9,6 +9,16 @@ import requests                                                                 
 import time                                                                     # import timer for loop pause
 import os                                                                       # import os so as to create directories
 
+
+# author-url constructor
+def constructor(file):
+    """generate a dictionary of authors and id's for scraping"""
+    sheet = open(file, 'r').readlines()                                         # open data sheet and read lines
+    sheet = sheet[1:]                                                           # remove header
+    sheet = [line.split(';') for line in sheet]                                 # split line into elements
+    authors = [{'id' : line[0], 'name' : line[1]} for line in sheet]            # construct list of dictionaries of ids and names
+    return authors                                                              # return constructed dictionary for book url crawling
+
 # book crawler
 def crawler(authors):
     """generates list of top 25 book txt gutenberg download urls based on the input author id list"""
@@ -62,18 +72,12 @@ def scraper(books):
                 time.sleep(1)                                                   # waits for a second so as to not accedentally dos-attack gutenberg
                 pass                                                            # continue
 
-
 # call stack
 def main():
-    data = [
-        {"id": "125", "name": "Joseph Conrad"},
-        {"id" : "9", "name" : "Herman Melville"}
-        ]
 
-    urls = crawler(data)
-
-    names = scraper(urls)
-    print(names)
+    authors = constructor('../data/authors.csv')                                # generate author dictionary
+    books = crawler(authors)                                                    # generate books urls
+    scraper(books)                                                              # perform scrape
 
 if __name__ == "__main__":
     main() 
