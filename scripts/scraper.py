@@ -14,7 +14,7 @@ def constructor(file):
     """generate a dictionary of authors and id's for scraping"""
 
     sheet = open(file, 'r').readlines()                                                 # open data sheet and read lines
-    sheet = sheet[1:]                                                                   # remove header
+    sheet = sheet[1:]
     sheet = [line.split(';') for line in sheet]                                         # split line into elements
     authors = [{'id' : line[0], 'name' : line[1]} for line in sheet if line[2] != '1']  # construct list of dictionaries of ids and names
     return authors                                                                      # return constructed dictionary for book url crawling
@@ -81,7 +81,7 @@ def scraper(books):
 # call stack
 def main():
     print("Procss initiated")                                                   # status update
-    authors = constructor('authors.csv')                                        # generate author dictionary
+    authors = constructor('../data/authors.csv')                                        # generate author dictionary
     print("Author dictionary generated")                                        # status update
     books = crawler(authors)                                                    # generate books urls
     print("Books links lists constructed")                                      # status update
