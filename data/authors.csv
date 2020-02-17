@@ -1,4 +1,4 @@
-﻿id;name;scraped;birth_year;death_year;works;nationality;gender;literacy_movement;birth_place;death_place;residence;gutenberg_link
+﻿id;name;scraped;birth_year;death_year;literacy_movement;nationality;gender;birth_place;death_place;residence;occupation;gutenberg_link
 37;Charles Dickens;1;1812;1870; Social commentary; British; Male; Portsmounth; Gad's Hill Place; Tavistock Hause 1851-1860; Journalist;
 125;Joseph Conrad;1;1857;1924; Early modernist; Bristish, Polish; Male; Berdychiv, Ukranie; Bishopsbourne, Kent, England; Britian; Sailor;
 68;Jane Austen;1;1775;1817; Romantism; British; Female; Steventon Rectory, Hampshire, England; Winchester, Hampshire, Englad; Chawton; Author;;
@@ -34,5 +34,5 @@
 4397;John Galsworthy;1;1867;1933; Realism; British; Male; Kingston upon Thames, Surray, England; Hampstead, London, England; England; Writer;
 1016;Ford Madox Ford;1;1873;1939; Impressionist; British; Male; Merton, Surray, England; Deaville, France; Winchelsea, England; Novolist;
 3;Abraham Lincoln;1;1809;1865; abolitionist;American; Male; Sinking SPring Farm, Kentucky, U.S.; Washington D.C., U.S.;The White Hause 1861-1865;President, politician;
-100;Kate Chopin;1850;1;1904; Realism; American; Female; St. Louis, Missouri, U.S.; St. Louise, Missouri, U.S.; St. Louise, Natchitoches; Buisness women, writer;;
+100;Kate Chopin;1;1850;1904; Realism; American; Female; St. Louis, Missouri, U.S.; St. Louise, Missouri, U.S.; St. Louise, Natchitoches; Buisness women, writer;;
 27;Charlotte Perkins Gilman;1;1860;1935; Realism; American; Female; Hartford, Connecticut, U.S.; Pasadena, California, U.S.; Norwich, Pasadena, U.S.; writer;;
