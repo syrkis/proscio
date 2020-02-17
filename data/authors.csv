@@ -1,7 +1,7 @@
 ﻿id;name;scraped;birth_year;death_year;works;literary_movement;nationality;gender;birth_place;death_place;residence;gutenberg_link
 37;Charles Dickens;1;1812;1870; Social commentary; British; Male; Portsmounth; Gad's Hill Place; Tavistock Hause 1851-1860; Journalist;
 125;Joseph Conrad;1;1857;1924; Early modernist; Bristish, Polish; Male; Berdychiv, Ukranie; Bishopsbourne, Kent, England; Britian; Sailor;
-68;Jane Austen;1;1817; Romantism; British; Female; Steventon Rectory, Hampshire, England; Winchester, Hampshire, Englad; Chawton; Author;;
+68;Jane Austen;1;1775;1817; Romantism; British; Female; Steventon Rectory, Hampshire, England; Winchester, Hampshire, Englad; Chawton; Author;;
 53;Mark Twain;1;1835;1910; Realism; American; Male; Florida, Massouri; Redding, Connecticut, U.S.; Hurtford, Connecticut; Humorist, Enterpreneur, publisher, lecturer;
 111;Oscar Wilde;1;1854;1900; Aestheticism; British; Male; Dublin, Ireland; Paris, France; Britain; Jounalist, Playwright;
 481;Edgar Allan Poe;1;1809;1849; Romantism; American; Male; Boston, Massachusetts, U.S.; Baltimore, Maryland, U.S.; Eastcoast of U.S.; Soldier, Cleck;
