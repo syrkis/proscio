@@ -1,4 +1,4 @@
-﻿id;name;scraped;birth_year;death_year;works;literary_movement;nationality;gender;birth_place;death_place;residence;gutenberg_link
+﻿id;name;scraped;birth_year;death_year;works;literary_movement;gender;nationality;birth_place;death_place;residence;gutenberg_link
 37;Charles Dickens;1;1812;1870; Social commentary; British; Male; Portsmounth; Gad's Hill Place; Tavistock Hause 1851-1860; Journalist;
 125;Joseph Conrad;1;1857;1924; Early modernist; Bristish, Polish; Male; Berdychiv, Ukranie; Bishopsbourne, Kent, England; Britian; Sailor;
 68;Jane Austen;1;1775;1817; Romantism; British; Female; Steventon Rectory, Hampshire, England; Winchester, Hampshire, Englad; Chawton; Author;;
