@@ -7,7 +7,12 @@ import re                                                                       
 import requests                                                                         # import internet browser
 import time                                                                             # import timer for loop pause
 import os                                                                               # import os so as to create directories
+import datetime
+import string
 
+
+# global variables
+nogo = r'\'".,:;%?_-/\()[]â¨Ã³'
 
 # author-url constructor
 def constructor(file):
@@ -37,7 +42,7 @@ def crawler(authors):
         urls = [url for url in urls if url != 'ebooks/']                                # removing empty links
         books[author['name']] = [base + url[6:] * 2 + format for url in urls]           # adding full links to books dict for scrape
         print(author, ' done')                                                          # status update
-        time.sleep(1)                                                                   # sleep so as to not dos gutenberg
+        time.sleep(0.3)                                                                   # sleep so as to not dos gutenberg
 
     return books                                                                        # returns dictionary with urls for scrape
 
@@ -46,13 +51,21 @@ def crawler(authors):
 def scraper(books):
     """scrapes data from given urls, and saves them as .txt files in directories corresponding to author names"""
     
+    date = datetime.datetime.now()
+    date = [date.year, date.month, date.day, date.hour, date.minute, date.second]
+    date = [str(entry) for entry in date]
+    date = "".join(date)    
+
     pattern = "Title: .*"                                                               # regex expression for finding titles in text
     skips = 0                                                                           # error counter
+    scrapes = 0
     
     for author in books.keys():                                                         # outer author loop   
                                                       
-        print('Starting scrape of', author)                                             # print new of author
-        directory = "_".join(author.lower().split(' '))                                 # create directory name from author name
+        print('Starting scrape of', author)   
+        directory = "".join([letter for letter in author if letter not in nogo])           # print new of author
+        directory = "_".join(directory.lower().split(' '))                                 # create directory name from author name
+        directory = 'dumps/' + date + '/' + directory
         if not os.path.exists(directory):                                               # ensuring directories do not already exists
             os.makedirs(directory)                                                      # makes author directory
 
@@ -63,32 +76,31 @@ def scraper(books):
                 content = page.text                                                     # reads book data
                 title = re.findall(pattern, content[:1000])                             # finds book title
                 title = title[0][7:]                                                    # removes 'Title: ' from title-string
-                nogos = ['[', ']', '/', '.', ',', '(', ')', '-', '_', '*', '—']
-                title = [letter for lette in title if letter not in nogos]
+                title = "".join([letter for letter in title if letter not in nogo])
                 file_name = "_".join(title[:-1].lower().split(' ')) + '.txt'            # removes spaces and convers to lower case for title
                 outfile = open(directory + '/' + file_name, 'w')                        # generating file to be written in, in author directory
                 outfile.write(content)                                                  # writing content to file
                 outfile.close()                                                         # closes file
                 print('Scraped', title)                                                 # informs stdout of successfull scrape
-                time.sleep(1)                                                           # waits for a second so as to not accedentally dos-attack gutenberg
+                scrapes += 1
+                time.sleep(0.3)                                                           # waits for a second so as to not accedentally dos-attack gutenberg
                 continue                                                                # continue   
             
             except:                                                                     # handler for if anything above goes wrong
                 skips += 1                                                              # increment error counter
                 print("Skip: ", skips)                                                  # print error notification to stdout
-                time.sleep(1)                                                           # waits for a second so as to not accedentally dos-attack gutenberg
+                time.sleep(0.3)                                                           # waits for a second so as to not accedentally dos-attack gutenberg
                 pass                                                                    # continue
+
+    print(scrapes, "scraped works in total")
 
 
 # call stack
 def main():
-    print("Procss initiated")                                                   # status update
-    authors = constructor('../data/authors.csv')                                        # generate author dictionary
-    print("Author dictionary generated")                                        # status update
-    books = crawler(authors)                                                    # generate books urls
-    print("Books links lists constructed")                                      # status update
-    scraper(books)                                                              # perform scrape
-    print("Prcess completed")                                                   # status update
+    authors = constructor('./data/meta_data.csv'); print("Procss initiated")    # generate author dictionary
+    books = crawler(authors); print("Author dictionary generated")              # generate books urls
+    scraper(books); print("Books links lists constructed")                      # perform scrape
+    return 0
 
 if __name__ == "__main__":
     main() 
