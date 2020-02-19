@@ -1,9 +1,13 @@
+# prosico specific
+data.zip
+data/
+dumps/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
-data/
-dumps/
+
 # C extensions
 *.so
 
