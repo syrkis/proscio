@@ -40,11 +40,17 @@ def lower(data):
 
 # character corrections
 def character(data):
-    delete = ['â\x80\x99', 'â\x80\x98', '--', 'â\x80\x99', 'â\x80\x99']
+    delete = [r'â\x80\x99', r'â\x80\x98', '--', r'â\x80\x99', r'â\x80\x99', '_', r'â\\x80\\x9']
     for string in delete:
         data = data.replace(string, ' ')
     return data
 
+
+# remove stop words
+def stopwords(data):
+    words = open('stopwords.txt', 'r').read().split('\n')
+    data = [word for word in data if word not in words]
+    return data
 
 # call stack
 def main():
