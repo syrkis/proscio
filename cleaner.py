@@ -11,7 +11,7 @@ def cleaner(file):
     """returns list of normalized words"""
     data = opener(file)
     data = legal(data)
-    data = [line[:-2] for line in data]
+    data = [line[:-1] for line in data]
     data = " ".join(data)
     data = data.replace('â', '')
     sentences = data.split('.')
@@ -20,7 +20,7 @@ def cleaner(file):
     data = [sentence for sentence in data if len(sentence) > 0]
     # data = tokenizer.tokenize(data)
     # data = [word for word in data if word not in stopwords]
-    return data
+    return data[:10]
 
 # reads lines of file
 def opener(file):
