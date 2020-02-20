@@ -8,33 +8,27 @@ from cleaner import stopwords
 
 # local imports
 import os
+import nltk
 
 # nltk imports
-import nltk
-nltk.download('punkt')
+# nltk.download('punkt')
 from nltk.stem import *
 from nltk.stem.porter import *
+from nltk.tokenize import RegexpTokenizer
 
 
 
 # file analysis
 def analysis(file):
     data = cleaner(file)
-    tokens = nltk.word_tokenize(data)
-    essentials = stopwords(tokens)
-    # stemmed = stemmer(tokens)
-    uniques = sorted(set(tokens))
-    freq_dist = nltk.FreqDist(essentials)
-    bigrams = list(nltk.bigrams(tokens))
-    collocations = nltk.collocations(data)
-    return freq_dist.most_common(10), bigrams[:10], collocations
-
-
-# precursory analysis
-def tokenize(file):
-    data = cleaner(file)
-    tokens = nltk.word_tokenize(data)
-    return data[:100]
+    stopwords = open('stopwords.txt', 'r').read().split('\n')
+    essentials = [word for word in data if word not in stopwords]
+    essentials = [word for word in essentials if word not in ['t', 'th', 's', 'o']]
+    stemmed = stemmer(essentials)
+    uniques = sorted(set(data))
+    freq_dist = nltk.FreqDist(stemmed)
+    bigrams = list(nltk.bigrams(data))
+    return freq_dist.most_common(100)
 
 
 # stem words
@@ -43,7 +37,6 @@ def stemmer(tokens):
     singles = [stem.stem(token) for token in tokens]
     return singles
 
-# tokenize words
 
 def main():
     file = './data/joseph_conrad/lord_jim.txt'
