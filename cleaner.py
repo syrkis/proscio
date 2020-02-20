@@ -4,20 +4,21 @@
 
 # import statements
 import nltk
-# nltk.download('punkt')
 from nltk.tokenize import RegexpTokenizer
 
 # cleaner
 def cleaner(file):
     """returns list of normalized words"""
-    stopwords = open('stopwords.txt', 'r').read().split('\n')
     data = opener(file)
     data = legal(data)
     data = [line[:-2] for line in data]
     data = " ".join(data)
     data = data.replace('â', '')
+    sentences = data.split('.')
     tokenizer = RegexpTokenizer(r'\w+')
-    data = tokenizer.tokenize(data)
+    data = [tokenizer.tokenize(sentence) for sentence in sentences]
+    data = [sentence for sentence in data if len(sentence) > 0]
+    # data = tokenizer.tokenize(data)
     # data = [word for word in data if word not in stopwords]
     return data
 
@@ -26,7 +27,6 @@ def opener(file):
     data = open(file, 'r').readlines()
     data = [line.lower() for line in data]
     return data
-
 
 # removes gutenberg legals
 def legal(data):
@@ -39,19 +39,6 @@ def legal(data):
         if end_line in data[i]:
             end = i
     data = data[start:end]
-    return data
-
-
-# character corrections
-def character(data):
-    delete = [r'â\x80\x99', r'â\x80\x98', '--', r'â\x80\x99', r'â\x80\x99', '_', r'â\\x80\\x9']
-    data = [entry for entry in data if entry not in delete]
-    return data
-
-# remove stop words
-def stopwords(data):
-    words = open('stopwords.txt', 'r').read().split('\n')
-    data = [word for word in data if word not in words]
     return data
 
 # call stack

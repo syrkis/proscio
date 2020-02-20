@@ -4,7 +4,6 @@
 
 # costum imports
 from cleaner import cleaner
-from cleaner import stopwords
 
 # local imports
 import os
@@ -21,6 +20,7 @@ from nltk.tokenize import RegexpTokenizer
 # file analysis
 def analysis(file):
     data = cleaner(file)
+    data = [word for sentence in data for word in sentence]
     stopwords = open('stopwords.txt', 'r').read().split('\n')
     essentials = [word for word in data if word not in stopwords]
     essentials = [word for word in essentials if word not in ['t', 'th', 's', 'o']]
@@ -28,8 +28,7 @@ def analysis(file):
     uniques = sorted(set(data))
     freq_dist = nltk.FreqDist(stemmed)
     bigrams = list(nltk.bigrams(data))
-    return freq_dist.most_common(100)
-
+    return freq_dist.most_common(300)
 
 # stem words
 def stemmer(tokens):
