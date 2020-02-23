@@ -9,7 +9,7 @@ import sys
 
 # prelimnary nltk analysis
 def analysis(data):
-    return data['joseph conrad']['labels']['gender']
+    return data['joseph conrad']['unigrams'][:50]
 
 
 # calls stack
