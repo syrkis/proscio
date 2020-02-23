@@ -1,6 +1,19 @@
-import requests
+# tmp.py
 
-page = requests.get('https://stopwords.syrkis.com')
-content = page.text.split('\n')
-content = [word for word in content]
-print(content)
+# by: Johan and Noah
+
+# imports
+import os
+
+# generate author features
+def features_constructor():
+    
+
+# connect labels and features
+def labels_constructor()
+
+def main():
+    pass
+
+if __name__ == "__main__":
+    main() 
