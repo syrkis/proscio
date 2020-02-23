@@ -27,7 +27,6 @@ def constructor(title):
 def analysis(file):
     data = book_cleaner(file)
     data = [word for sentence in data for word in sentence]
-    stopwords = open('stopwords.txt', 'r').read().split('\n')
     import requests
     stopwords = requests.get('https://stopwords.syrkis.com')
     stopwords = stopwords.text.split('\n')
