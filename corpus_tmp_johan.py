@@ -26,8 +26,8 @@ def constructor():
         path = os.path.join(os.getcwd(), 'data', author)
         corpus[author] = {'unigrams':[], 'labels': {'birth' : data[idx][2], 'gender' : data[idx][-1], 'nationality' : data[idx][-2]}}
         for book in os.scandir(path):
-            print(author)
-            print(book)
+            #print(author)
+            #print(book)
             corpus[author]['unigrams'] += standardize(book)
     return corpus
 
