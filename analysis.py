@@ -2,34 +2,43 @@
 #   natural language analysis script
 # by: Noah Syrkis
 
-# costum imports
-from cleaner import cleaner
-from cleaner import stopwords
-
-# local imports
+#  imports
 import os
-import nltk
-
-# nltk imports
-# nltk.download('punkt')
+import nltk; nltk.download('punkt')
+import requests
 from nltk.stem import *
 from nltk.stem.porter import *
 from nltk.tokenize import RegexpTokenizer
+from cleaner import cleaner
+from features import features
 
+features_dict = features()
+titles = [title for title in features_dict.keys()]
+path = os.getcwd(); data = 'data'
+
+def constructor(title):
+    author = features_dict[title][0]
+    author.replace(' ', '_')
+    directory = os.path.join(path, data, author, title)
+    entry = [cleaner(directory), features_dict[title]]
 
 
 # file analysis
 def analysis(file):
     data = cleaner(file)
+    data = [word for sentence in data for word in sentence]
     stopwords = open('stopwords.txt', 'r').read().split('\n')
+    import requests
+    stopwords = requests.get('https://stopwords.syrkis.com')
+    stopwords = stopwords.text.split('\n')
+    stopwords = [word for word in stopwords]
     essentials = [word for word in data if word not in stopwords]
     essentials = [word for word in essentials if word not in ['t', 'th', 's', 'o']]
     stemmed = stemmer(essentials)
     uniques = sorted(set(data))
     freq_dist = nltk.FreqDist(stemmed)
     bigrams = list(nltk.bigrams(data))
-    return freq_dist.most_common(100)
-
+    return freq_dist.most_common(300)
 
 # stem words
 def stemmer(tokens):
@@ -39,8 +48,10 @@ def stemmer(tokens):
 
 
 def main():
-    file = './data/joseph_conrad/lord_jim.txt'
-    return analysis(file)
+    print(features_dict['heart_of_darkness.txt'])
+    # return constructor('heart_of_darkness.txt')
+    # file = './data/joseph_conrad/lord_jim.txt'
+    # return analysis(file)
 
 if __name__ == "__main__":
     print(main())
