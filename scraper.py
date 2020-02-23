@@ -12,7 +12,7 @@ import string
 
 
 # global variables
-nogo = r'\'".,:;%?_-/\()[]â¨Ã³'
+nogo = r'\'".,:;%?_-/\()[]â¨Ã³ëäöüË'
 
 # author-url constructor
 def constructor(file):
