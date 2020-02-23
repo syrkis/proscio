@@ -17,7 +17,7 @@ def bibliography(author):
     bibliography = {author: {'unigrams': [], 'labels' : labeling(author)}}
     for book in os.scandir(path):
         unigrams = standardize(book)
-        # bibliography[author]['unigrams'] += unigrams
+        bibliography[author]['unigrams'] += unigrams
     return bibliography[author]
 
 
@@ -28,7 +28,7 @@ def labeling(author):
         author = author.replace('_', ' ')
     author = author.lower()
     data = metadata()
-    data = data
+    data = data[author]
     return data
 
 

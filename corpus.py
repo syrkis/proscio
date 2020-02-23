@@ -17,7 +17,6 @@ def constructor():
     authors = [row[1] for row in data]
     datastructure = {}
     for author in authors:
-        print(author)
         datastructure[author] = bibliography(author)
     return datastructure
 

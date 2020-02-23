@@ -1,19 +1,21 @@
-# tmp.py
+# tmp
+#   temporary work space
+# by: Noah Syrkis
 
-# by: Johan and Noah
+# import statements
+from corpus import constructor
+import nltk
+import sys
 
-# imports
-import os
+# prelimnary nltk analysis
+def analysis(data):
+    return data['joseph conrad']['labels']['gender']
 
-# generate author features
-def features_constructor():
-    
 
-# connect labels and features
-def labels_constructor()
-
+# calls stack
 def main():
-    pass
+    data = constructor()
+    return analysis(data)
 
 if __name__ == "__main__":
-    main() 
+    print(main())  
