@@ -37,7 +37,7 @@ def stemmer(tokens):
 
 # reads lines of file
 def opener(file):
-    filedata = open(file, 'r')
+    filedata = open(file, 'r', encoding='utf-8')
     data = filedata.readlines()
     data = [line.lower() for line in data]
     filedata.close()
@@ -60,7 +60,7 @@ def legal(data):
 
 # call stack
 def main():
-    return standardize('./data/joseph_conrad/lord_jim.txt')
+    return cleaner('./data/joseph_conrad/lord_jim.txt')
     # author_paths = os.listdir('data')
     # author_books_structure = {}
     # for author in author_paths:
