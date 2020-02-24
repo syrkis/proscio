@@ -59,7 +59,7 @@ def legal(data):
     return data
 
 #Takes in author_corpus, shuffles it and then splits it into n new features
-def title_features(author_corpus, n=30, log=False):  # note used to be called author_features thus author_corpus input
+def title_features(author_corpus,word_features, n=30, log=False):  # note used to be called author_features thus author_corpus input
     """Input:
         author_corpus is a list of sentences (list) or a list of words (strings)
         n is the number of desired chunks to split the input
