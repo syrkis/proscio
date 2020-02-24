@@ -31,7 +31,7 @@ def constructor():
 
 
 def main():
-    return constructor()
+    return constructor()['joseph_conrad']['titles']['victory']['sentences'][1000]
 
 if __name__ == "__main__":
     print(main())
