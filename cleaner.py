@@ -11,7 +11,7 @@ from nltk.stem.porter import *
 
 
 # standardizer
-def cleaner(file):
+def (file):
     """returns list of stemmed and standardized list of sentences (also in list forms)"""
     data = opener(file)
     data = legal(data)
