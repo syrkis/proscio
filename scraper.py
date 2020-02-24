@@ -97,7 +97,7 @@ def scraper(books):
 
 # call stack
 def main():
-    authors = constructor('./data/meta.csv'); print("Procss initiated")    # generate author dictionary
+    authors = constructor('./data/meta.csv'); print("Procss initiated")         # generate author dictionary
     books = crawler(authors); print("Author dictionary generated")              # generate books urls
     scraper(books); print("Books links lists constructed")                      # perform scrape
     return 0

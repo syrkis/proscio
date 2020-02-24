@@ -9,10 +9,10 @@ import requests
 from nltk.stem import *
 from nltk.stem.porter import *
 from nltk.tokenize import RegexpTokenizer
-from cleaner import cleaner
+from cleaner import book_cleaner
 from features import features
 
-features_dict = features()
+features_dict, authors_path = features()
 titles = [title for title in features_dict.keys()]
 path = os.getcwd(); data = 'data'
 
@@ -20,14 +20,13 @@ def constructor(title):
     author = features_dict[title][0]
     author.replace(' ', '_')
     directory = os.path.join(path, data, author, title)
-    entry = [cleaner(directory), features_dict[title]]
+    entry = [book_cleaner(directory), features_dict[title]]
 
 
 # file analysis
 def analysis(file):
-    data = cleaner(file)
+    data = book_cleaner(file)
     data = [word for sentence in data for word in sentence]
-    stopwords = open('stopwords.txt', 'r').read().split('\n')
     import requests
     stopwords = requests.get('https://stopwords.syrkis.com')
     stopwords = stopwords.text.split('\n')
@@ -49,6 +48,7 @@ def stemmer(tokens):
 
 def main():
     print(features_dict['heart_of_darkness.txt'])
+    print(authors_path)
     # return constructor('heart_of_darkness.txt')
     # file = './data/joseph_conrad/lord_jim.txt'
     # return analysis(file)

@@ -1,6 +1,21 @@
-import requests
+# tmp
+#   temporary work space
+# by: Noah Syrkis
 
-page = requests.get('https://stopwords.syrkis.com')
-content = page.text.split('\n')
-content = [word for word in content]
-print(content)
+# import statements
+from corpus import constructor
+import nltk
+import sys
+
+# prelimnary nltk analysis
+def analysis(data):
+    return data['joseph conrad']['unigrams'][:50]
+
+
+# calls stack
+def main():
+    data = constructor()
+    return analysis(data)
+
+if __name__ == "__main__":
+    print(main())  
