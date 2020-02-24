@@ -57,6 +57,53 @@ def legal(data):
     data = data[start:end]
     return data
 
+#Takes in author_corpus, shuffles it and then splits it into n new features
+def author_features(author_corpus, n=30, log=False):
+    """Input:
+        author_corpus is a list of sentences (list) or a list of words (strings)
+        n is the number of desired chunks to split the input
+        log=False if True it returns n*log(len(input)) chunks
+        
+        Return:
+            returns a list of features each of which is a dictionary"""
+   
+    # including the if check because I'm not sure if it works properly with lists of strings instead of lists of lists
+    if not all(isinstance(x, str) for x in author_corpus):
+        words=[]
+        for sentence in author_corpus:
+            words += sentence
+    else:
+        words = author_corpus
+
+    if log == True:
+        n=int(n*math.log(len(words),2))
+    
+    random.shuffle(words)
+    def chunks(lst, n):  # taken from stackoverflow
+        """Yield successive n-sized chunks from lst."""
+        n = len(lst)//n
+        for i in range(0, len(lst), n):
+            yield lst[i:i + n]
+
+    features = list(chunks(words, n))
+    document_words_list = []
+
+    for feature in features:
+        document_words_list.append(set(feature))
+    #document_words = set(words)
+    features_list = []
+    for document_words in document_words_list:
+
+        features = {}
+        for word in word_features:
+            features[f'contains({word})'] = (word in document_words)
+        features_list.append(features)
+    return features_list
+
+
+
+
+
 
 # call stack
 def main():
