@@ -26,7 +26,8 @@ def constructor():
         path = os.path.join(os.getcwd(), 'data', author)
         corpus[author] = {'titles' : { }, 'labels': {'birth' : data[idx][2], 'gender' : data[idx][-1], 'nationality' : data[idx][-2]}}
         for book in os.scandir(path):
-            corpus[author]['titles'][book.name[:-4]] = {'sentences' : cleaner(book)}
+            if book.name != '.DS_Store':
+                corpus[author]['titles'][book.name[:-4]] = {'sentences' : cleaner(book)}
     return corpus
 
 
