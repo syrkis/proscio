@@ -1,6 +1,6 @@
 # corpus.py
 #   generates full nltk ready data corpus
-# by: Noah Syrkis and edited by Johan Laursen
+# by: Noah Syrkis and Johan Laursen
 
 #imports
 import os
@@ -20,19 +20,21 @@ def constructor():
     authors = [row[1] for row in data]
     corpus = {}
     for idx, author in enumerate(authors):
+        # print('__________________________________', author)
         if ' ' in author:
             author = author.replace(' ', '_')
         author = author.lower()
         path = os.path.join(os.getcwd(), 'data', author)
         corpus[author] = {'titles' : { }, 'labels': {'birth' : data[idx][2], 'gender' : data[idx][-1], 'nationality' : data[idx][-2]}}
         for book in os.scandir(path):
+            # print(book.name)
             if book.name != '.DS_Store':
                 corpus[author]['titles'][book.name[:-4]] = {'sentences' : cleaner(book)}
     return corpus
 
 
 def main():
-    return constructor()['joseph_conrad']['titles']['victory']['sentences'][1000]
+    return constructor()
 
 if __name__ == "__main__":
     print(main())
