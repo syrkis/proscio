@@ -59,8 +59,15 @@ def legal(data):
     data = data[start:end]
     return data
 
+def ngrams(sentence, n):
+    grams = []
+    if len(sentence) >= n:
+        for i in range(len(sentence)):
+            grams.append(sentence[i:i+n])
+    return grams
+
 #Takes in author_corpus, shuffles it and then splits it into n new features
-def title_features(author_corpus,word_features, n=30, log=False):  # note used to be called author_features thus author_corpus input
+def title_features(author_corpus,word_features, n=30, log=False, grams=[2,3,4,5]):  # note used to be called author_features thus author_corpus input
     """Input:
         author_corpus is a list of sentences (list) or a list of words (strings)
         n is the number of desired chunks to split the input
@@ -69,13 +76,24 @@ def title_features(author_corpus,word_features, n=30, log=False):  # note used t
         Return:
             returns a list of features each of which is a dictionary"""
    
+    
+    total_grams = []
+    
     # including the if check because I'm not sure if it works properly with lists of strings instead of lists of lists
     if not all(isinstance(x, str) for x in author_corpus):
         words=[]
         for sentence in author_corpus:
             words += sentence
+            sentence_grams = []
+            for i in grams:
+                sentence_grams += ngrams(sentence, i)
+            for gram in sentence_grams:
+                total_grams.append("_".join(gram))
+
     else:
         words = author_corpus
+    
+    words = words+total_grams
 
     if log == True:
         n=int(n*math.log(len(words),2))
