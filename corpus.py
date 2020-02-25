@@ -16,7 +16,7 @@ def constructor():
     with open(os.path.join("data","meta.csv"),'r') as file:
         data = file.read()
     data = data.split('\n')
-    data = [row.split(',') for row in data [1:-1]]
+    data = [row.split(',') for row in data [1:]]
     authors = [row[1] for row in data]
     corpus = {}
     for idx, author in enumerate(authors):
