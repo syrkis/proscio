@@ -19,7 +19,7 @@ def ngrams(n, sentences):
 def main():
     data = constructor()
     victory = data['joseph_conrad']['titles']['victory']['sentences']
-    return ngrams(3, victory)
+    return ngrams(1, victory)
 
 if __name__ == "__main__":
     print(main())  

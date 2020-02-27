@@ -20,7 +20,7 @@ def constructor(file):
 
     sheet = open(file, 'r').readlines()                                                 # open data sheet and read lines
     sheet = sheet[1:]
-    sheet = [line.split(';') for line in sheet]                                         # split line into elements
+    sheet = [line.split(',') for line in sheet]                                         # split line into elements
     authors = [{'id' : line[0], 'name' : line[1]} for line in sheet if line[2] != '1']  # construct list of dictionaries of ids and names
     return authors                                                                      # return constructed dictionary for book url crawling
 
